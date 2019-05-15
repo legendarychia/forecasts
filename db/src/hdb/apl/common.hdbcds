@@ -1,6 +1,6 @@
 namespace aa.forecasts.db.hdb.apl;
 
-context forecasts {
+context forecast {
     table type tt_function_header {
         "KEY"   : String(50);
         "VALUE" : String(255);

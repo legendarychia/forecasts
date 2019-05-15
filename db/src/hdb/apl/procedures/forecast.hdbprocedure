@@ -9,26 +9,26 @@ PROCEDURE "aa.forecasts.db.hdb.apl.procedures::forecast" (
     in ForcePositiveForecast  varchar(100) default 'false',
     in ForecastMaxCyclics     integer      default 450,
     in ForecastMaxLags        integer      default NULL,
-    out operation_config     "aa.forecasts.db.hdb.apl::forecasts.tt_operation_config",
-    out results              "aa.forecasts.db.hdb.apl::forecasts.tt_results",
-    out operation_log        "aa.forecasts.db.hdb.apl::forecasts.tt_operation_log",
-    out summary              "aa.forecasts.db.hdb.apl::forecasts.tt_summary",
-    out indicators           "aa.forecasts.db.hdb.apl::forecasts.tt_indicators"
+    out operation_config     "aa.forecasts.db.hdb.apl::forecast.tt_operation_config",
+    out results              "aa.forecasts.db.hdb.apl::forecast.tt_results",
+    out operation_log        "aa.forecasts.db.hdb.apl::forecast.tt_operation_log",
+    out summary              "aa.forecasts.db.hdb.apl::forecast.tt_summary",
+    out indicators           "aa.forecasts.db.hdb.apl::forecast.tt_indicators"
 )
 LANGUAGE SQLSCRIPT SQL SECURITY INVOKER AS
 BEGIN
     declare FunctionName varchar(255) := 'forecast';
     --declare cursor coldesc for select position, column_name from sys.table_columns where table_name = 'CashFlows_extrapredictors';
 
-    create local temporary table #forecast_function_header  like "aa.forecasts.db.hdb.apl::forecasts.tt_function_header";
-    create local temporary table #forecast_operation_config like "aa.forecasts.db.hdb.apl::forecasts.tt_operation_config";
-    create local temporary table #forecast_variable_descs   like "aa.forecasts.db.hdb.apl::forecasts.tt_variable_descs";
-    create local temporary table #forecast_variable_roles   like "aa.forecasts.db.hdb.apl::forecasts.tt_variable_roles";
+    create local temporary table #forecast_function_header  like "aa.forecasts.db.hdb.apl::forecast.tt_function_header";
+    create local temporary table #forecast_operation_config like "aa.forecasts.db.hdb.apl::forecast.tt_operation_config";
+    create local temporary table #forecast_variable_descs   like "aa.forecasts.db.hdb.apl::forecast.tt_variable_descs";
+    create local temporary table #forecast_variable_roles   like "aa.forecasts.db.hdb.apl::forecast.tt_variable_roles";
 
-    create local temporary table #forecast_operation_log    like "aa.forecasts.db.hdb.apl::forecasts.tt_operation_log";
-    create local temporary table #forecast_summary          like "aa.forecasts.db.hdb.apl::forecasts.tt_summary";
-    create local temporary table #forecast_indicators       like "aa.forecasts.db.hdb.apl::forecasts.tt_indicators";
-    create local temporary table #forecast_results          like "aa.forecasts.db.hdb.apl::forecasts.tt_results";
+    create local temporary table #forecast_operation_log    like "aa.forecasts.db.hdb.apl::forecast.tt_operation_log";
+    create local temporary table #forecast_summary          like "aa.forecasts.db.hdb.apl::forecast.tt_summary";
+    create local temporary table #forecast_indicators       like "aa.forecasts.db.hdb.apl::forecast.tt_indicators";
+    create local temporary table #forecast_results          like "aa.forecasts.db.hdb.apl::forecast.tt_results";
 
     -- Insert operation parameters
     insert into #forecast_function_header values ('Oid', '#42');
@@ -49,7 +49,7 @@ BEGIN
     if :DatasetName like '%_extrapredictors'
     then
         FunctionName := FunctionName || '_' || DatasetName;
-        exec 'insert into #forecast_variable_descs select * from "aa.forecasts.db.data::KxDesc_' || :DatasetName || '";';
+        exec 'insert into #forecast_variable_descs select * from "aa.forecast.db.data::KxDesc_' || :DatasetName || '";';
     end if;
 
     insert into #forecast_variable_descs values (0, 'signal_time'  , 'date'     , 'continuous', 1, 1, null, null, null, null);
