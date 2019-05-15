@@ -44,7 +44,7 @@ BEGIN
     || '    select '
     || '        to_int(rank() over (order by "idx" asc, "signal_time" asc)) as "signal_time", "signal_value", "forecast", "standard_error", "lowerlimit_80", "upperlimit_80",  "lowerlimit_95",  "upperlimit_95"'
     || '    from ('
-    || '        select 1 as "idx", "signal_time", "signal_value" , null as "forecast", null as "standard_error", null as "lowerlimit_80", null as "upperlimit_80", null as "lowerlimit_95", null as "upperlimit_95" from "aa.forecast.db.hdb.pal.views::' || DatasetName || '"'
+    || '        select 1 as "idx", "signal_time", "signal_value" , null as "forecast", null as "standard_error", null as "lowerlimit_80", null as "upperlimit_80", null as "lowerlimit_95", null as "upperlimit_95" from "aa.forecasts.db.hdb.pal.views::' || DatasetName || '"'
     || '        union all'
     || '        select 2 as "idx", "signal_time", null, "forecast", "standard_error", "lowerlimit_80", "upperlimit_80",  "lowerlimit_95",  "upperlimit_95" from #auto_arima_output_raw'
     || '    )'
