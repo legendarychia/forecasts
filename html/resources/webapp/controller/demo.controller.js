@@ -1,5 +1,5 @@
 sap.ui.define([
-	"forecasts/html/base/Controller"
+	"forecasts/html/base/Controller",
 ], function(Controller) {
 	"use strict";
 	return Controller.extend("forecasts.html.controller.demo", {

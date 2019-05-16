@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageBox",
-	"forecasts/html/model/formatter"
-], function(Controller, History, Filter, FilterOperator, MessageBox, formatter) {
+	"forecasts/html/model/formatter",
+	"sap/ui/core/routing/Router"
+], function(Controller, History, Filter, FilterOperator, MessageBox, formatter, Router) {
 	"use strict";
 	return Controller.extend("forecasts.html.base.controller", {
 		formatter: formatter,
