@@ -132,7 +132,7 @@
 			"routes": [{
 				"name": "home",
 				"pattern": "",
-				"target": ["demo"]
+				"target": "demo"
 			},
 			{
 				"name": "forecast",
@@ -156,17 +156,17 @@
 		}],
 			"targets": {
 			"demo": {
-				"clearAggregation": true,
-				"viewName": "demo",
-				"viewLevel": 1
+			"clearAggregation": true,
+			"viewName": "demo",
+			"viewLevel": 1
 			},
 			"forecast": {
 			"clearAggregation": true,
 			"viewName": "algorithms.apl.forecast"
 			},
 			"auto_arima": {
-				"clearAggregation": true,
-				"viewName": "algorithms.pal.auto_arima"
+			"clearAggregation": true,
+			"viewName": "algorithms.pal.auto_arima"
 			},
 			"auto_smooting": {
 			"clearAggregation": true,
